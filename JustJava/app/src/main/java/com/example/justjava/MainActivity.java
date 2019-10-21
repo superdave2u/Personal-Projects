@@ -23,19 +23,18 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage = "Total: $" + (numberOfCoffees * 5) + "\n" + "Thank You!";
-        displayMessage(priceMessage);
+        displayMessage(createOrderSummery(numberOfCoffees, (numberOfCoffees * 5)));
     }
 
     public void increment(View view) {
         numberOfCoffees = numberOfCoffees + 1;
-        display(numberOfCoffees);
+        displayQuantity(numberOfCoffees);
         displayPrice(numberOfCoffees * 5);
     }
 
     public void decrement(View view) {
         numberOfCoffees = numberOfCoffees - 1;
-        display(numberOfCoffees);
+        displayQuantity(numberOfCoffees);
         displayPrice(numberOfCoffees * 5);
     }
     
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
@@ -62,5 +61,18 @@ public class MainActivity extends AppCompatActivity {
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(message);
+    }
+
+    /**
+     * Creates the order Summery to be displayed to user.
+     * @param quantity number of items
+     * @param priceOfOrder price of total items.
+     * @return string message thanking user.
+     */
+    private String createOrderSummery(int quantity, int priceOfOrder) {
+        return("Name: Kaptain Kunal\n"
+                + "Quantity: " + quantity + "\n"
+                + "Total: " + priceOfOrder + "\n"
+                + "Thank You!");
     }
 }
