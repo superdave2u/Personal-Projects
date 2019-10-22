@@ -23,16 +23,12 @@
 
         <TextView
             android:id="@+id/toppings_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/headerTextStyle"
             android:layout_below="@+id/enter_name_view"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/toppings"
-            android:textAllCaps="true"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:text="@string/toppings" />
 
         <CheckBox
             android:id="@+id/checkbox_whipped_cream"
@@ -54,14 +50,13 @@
 
         <TextView
             android:id="@+id/quantity_word"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/headerTextStyle"
             android:layout_below="@+id/checkbox_chocolate"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="@string/quantity"
-            android:textAllCaps="true"
+
             android:textColor="@android:color/black" />
 
         <LinearLayout
@@ -87,8 +82,7 @@
 
             <TextView
                 android:id="@+id/quantity_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/headerTextStyle"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:text="@string/initial_quantity_value"
@@ -110,15 +104,12 @@
 
         <TextView
             android:id="@+id/price_word"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/headerTextStyle"
             android:layout_below="@+id/quantity_layout"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/order"
-            android:textAllCaps="true"
-            android:textColor="@android:color/black" />
+            android:text="@string/order" />
 
         <TextView
             android:id="@+id/orderSummeryTextView"
