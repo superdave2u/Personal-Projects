@@ -7,6 +7,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
+import android.net.Uri;
+
 
 import java.text.NumberFormat;
 
@@ -32,12 +35,15 @@ public class MainActivity extends AppCompatActivity {
         CheckBox addWhipCream = (CheckBox) findViewById(R.id.checkbox_whipped_cream);
         CheckBox addChocolate = (CheckBox) findViewById(R.id.checkbox_chocolate);
         EditText nameOfPerson = (EditText) findViewById(R.id.enter_name_view);
-        displayMessage(createOrderSummery(nameOfPerson.getText().toString(),
+        String combinedOrder = (createOrderSummery(nameOfPerson.getText().toString(),
                 numberOfCoffees,
                 (numberOfCoffees * 5),
                 addWhipCream.isChecked(),
                 addChocolate.isChecked()));
+        String[] testEmails = new String[]{"test@test.com"};
+        composeEmail(testEmails, nameOfPerson.getText().toString(), combinedOrder);
     }
+
 
     public void increment(View view) {
         if ((numberOfCoffees + 1) >= 1 && (numberOfCoffees + 1) <= 5){
@@ -77,13 +83,13 @@ public class MainActivity extends AppCompatActivity {
         TextView orderSummeryTextView = (TextView) findViewById(R.id.orderSummeryTextView);
         orderSummeryTextView.setText(NumberFormat.getCurrencyInstance().format(number));
     }
-    /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        TextView orderSummeryTextView = (TextView) findViewById(R.id.orderSummeryTextView);
-        orderSummeryTextView.setText(message);
-    }
+//    /**
+//     * This method displays the given text on the screen.
+//     */
+//    private void displayMessage(String message) {
+//        TextView orderSummeryTextView = (TextView) findViewById(R.id.orderSummeryTextView);
+//        orderSummeryTextView.setText(message);
+//    }
     /**
      * Creates the order Summery to be displayed to user.
      * @param personName String value of a person's name who is ordering
@@ -105,11 +111,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        return("Name: " + personName + "\n"
-                + "Quantity: $" + quantity + "\n"
-                + "Total: " + calculateTotalPrice + "\n"
-                + "Add Whipped Cream? " + addWhipCream + "\n"
-                + "Add Chocolate? " + addChocolate + "\n"
-                + "Thank You!");
+        return(getString(R.string.order_summary_name) + personName + "\n"
+                + getString(R.string.order_summary_quantity) + quantity + "\n"
+                + getString(R.string.order_summary_price) + calculateTotalPrice + "\n"
+                + getString(R.string.order_summary_whipped_cream) + addWhipCream + "\n"
+                + getString(R.string.order_summary_chocolate) + addChocolate + "\n"
+                + getString(R.string.thank_you));
     }
+
+    public void composeEmail(String[] addresses, String subject, String emailBody) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + subject);
+        intent.putExtra(Intent.EXTRA_TEXT, emailBody);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
 }
