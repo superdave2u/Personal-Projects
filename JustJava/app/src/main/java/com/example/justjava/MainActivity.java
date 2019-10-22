@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.text.NumberFormat;
 
 /**
@@ -38,15 +40,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void increment(View view) {
-        numberOfCoffees = numberOfCoffees + 1;
-        displayQuantity(numberOfCoffees);
-        displayPrice(numberOfCoffees * 5);
+        if ((numberOfCoffees + 1) >= 1 && (numberOfCoffees + 1) <= 5){
+            numberOfCoffees += 1;
+            displayQuantity(numberOfCoffees);
+            displayPrice(numberOfCoffees * 5);
+        }else{
+            Toast.makeText(this, "You cannot have more than 5 coffees", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void decrement(View view) {
-        numberOfCoffees = numberOfCoffees - 1;
-        displayQuantity(numberOfCoffees);
-        displayPrice(numberOfCoffees * 5);
+        if ((numberOfCoffees - 1) >= 1 && (numberOfCoffees - 1) <= 5){
+            numberOfCoffees -= 1;
+            displayQuantity(numberOfCoffees);
+            displayPrice(numberOfCoffees * 5);
+        }else{
+            Toast.makeText(this, "You cannot order less than 0 coffee", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /**
@@ -82,9 +94,20 @@ public class MainActivity extends AppCompatActivity {
      * @return string message thanking user.
      */
     private String createOrderSummery(String personName, int quantity, int priceOfOrder, boolean addWhipCream, boolean addChocolate) {
+        int calculateTotalPrice = priceOfOrder;
+
+        if (addWhipCream) {
+            calculateTotalPrice = calculateTotalPrice + 1;
+        }
+        if (addChocolate) {
+            calculateTotalPrice = calculateTotalPrice + 2;
+        }
+
+
+
         return("Name: " + personName + "\n"
-                + "Quantity: " + quantity + "\n"
-                + "Total: " + priceOfOrder + "\n"
+                + "Quantity: $" + quantity + "\n"
+                + "Total: " + calculateTotalPrice + "\n"
                 + "Add Whipped Cream? " + addWhipCream + "\n"
                 + "Add Chocolate? " + addChocolate + "\n"
                 + "Thank You!");

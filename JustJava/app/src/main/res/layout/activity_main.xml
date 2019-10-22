@@ -14,25 +14,25 @@
             android:id="@+id/enter_name_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            android:inputType="textMultiLine"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            android:hint="Name"
+            android:inputType="textCapWords" />
 
 
         <TextView
             android:id="@+id/toppings_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/enter_name_view"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="Toppings"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_below="@+id/enter_name_view"/>
+            android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/checkbox_whipped_cream"
