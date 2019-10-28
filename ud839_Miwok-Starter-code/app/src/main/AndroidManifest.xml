@@ -22,7 +22,6 @@
         <activity
             android:name=".PhrasesActivity"
             android:label="@string/category_phrases" />
-        
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
