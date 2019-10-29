@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Amoeba_text_assets</string>
+    <string name="campSite">Camping</string>
+    <string name="allWaypoints">All Waypoints</string>
+    <string name="waterSources">Water Sources</string>
+    <string name="parking">Parking</string>
+    <string name="road">Road</string>
+    <string name="map">Map</string>
+    <string name="guide">Guide</string>
+    <string name="elevation">Elevation</string>
+    <string name="plusSign" translatable="false">+</string>
+    <string name="minusSign" translatable="false">-</string>
+    <string name="northbound">Northbound</string>
+    <string name="southbound">Southbound</string>
+    <string name="unitedStates">United States</string>
+    <string name="share">Share</string>
+    <string name="junction">Junction</string>
+    <string name="wireFence">Wire Fence</string>
+    <string name="waterFountain">Water Fountain</string>
+    <string name="viewpoint">Viewpoint</string>
+    <string name="picnicArea">Picnic Area</string>
+    <string name="trailhead">Trailhead</string>
+    <string name="waterTank">Water Tank</string>
+    <string name="pipeGate">Pipe Gate</string>
+    <string name="highwayUnderpass">Highway Underpass</string>
+    <string name="undergroundCistern">Underground Cistern</string>
+    <string name="waterCache">Water Cache</string>
+    <string name="highway">Highway</string>
+    <string name="picnicArea_private">Private picnic area</string>
+    <string name="stream">Stream</string>
+    <string name="stream_dry">Dry Stream</string>
+    <string name="powerlines">Powerlines</string>
+</resources>

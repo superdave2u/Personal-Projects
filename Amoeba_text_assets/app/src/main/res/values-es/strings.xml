@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Amoeba_text_assets</string>
+    <string name="campSite">Cámping</string>
+    <string name="allWaypoints">Todos los waypoints</string>
+    <string name="waterSources">Fuentes de agua</string>
+    <string name="parking">Estacionamiento</string>
+    <string name="road">La carretera</string>
+    <string name="map">Mapa</string>
+    <string name="guide">Guía</string>
+    <string name="elevation">Elevación</string>
+    <string name="northbound">Dirección norte</string>
+    <string name="southbound">Dirección sur</string>
+    <string name="unitedStates">Estados Unidos</string>
+    <string name="share">Compartir</string>
+    <string name="junction">cruce</string>
+    <string name="wireFence">Cerca de alambre</string>
+    <string name="waterFountain">Fuente de agua</string>
+    <string name="viewpoint">Punto de vista</string>
+    <string name="picnicArea">Área de picnic</string>
+    <string name="trailhead">Trailhead</string>
+    <string name="waterTank">Depósito de agua</string>
+    <string name="pipeGate">Puerta de la tubería</string>
+    <string name="highwayUnderpass">Paso subterráneo de la autopista</string>
+    <string name="undergroundCistern">Cisterna Subterránea</string>
+    <string name="waterCache">Caché de agua</string>
+    <string name="highway">autopista</string>
+    <string name="picnicArea_private">Área de picnic privada</string>
+    <string name="stream">Corriente</string>
+    <string name="stream_dry">Corriente seca</string>
+    <string name="powerlines">Líneas eléctricas</string>
+</resources>

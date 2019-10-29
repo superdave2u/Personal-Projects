@@ -63,6 +63,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
         TextView defaultTranslatedTextView = (TextView) listItemView.findViewById(R.id.topTextBar);
         // Get the version name from the current AndroidFlavor object and
         // set this text on the name TextView
+        assert currentTranslatedWord != null;
         defaultTranslatedTextView.setText(currentTranslatedWord.getDefaultTranslation());
 
         // Find the TextView in the list_item.xml layout with the ID version_number
