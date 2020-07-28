@@ -3,77 +3,60 @@
 import math
 
 
-def sin(*args, **kwargs):
-    degrees = kwargs.get('degrees', None)
-    opposite = kwargs.get('opposite', None)
-    hypotenuse = kwargs.get('hypotenuse', None)
-
-    if degrees:
-        return math.sin(math.radians(degrees))
-    elif opposite and hypotenuse:
-        return(opposite / hypotenuse)
+def sin_from_degrees(degrees):
+    return math.sin(math.radians(degrees))
 
 
-def cos(*args, **kwargs):
-    degrees = kwargs.get('degrees', None)
-    adjacent = kwargs.get('adjacent', None)
-    hypotenuse = kwargs.get('hypotenuse', None)
-
-    if degrees:
-        return math.cos(math.radians(degrees))
-    elif adjacent and hypotenuse:
-        return(adjacent / hypotenuse)
+def sin_from_edges(*, opposite, hypotenuse):
+    return(opposite / hypotenuse)
 
 
-def tan(*args, **kwargs):
-    degrees = kwargs.get('degrees', None)
-    adjacent = kwargs.get('adjacent', None)
-    opposite = kwargs.get('opposite', None)
-
-    if degrees:
-        return math.tan(math.radians(degrees))
-    elif opposite and adjacent:
-        return(opposite / adjacent)
+def cos_from_degrees(degrees):
+    return math.cos(math.radians(degrees))
 
 
-def find_missing_side(*args, **kwargs):
-    sin = kwargs.get('sin', None)
-    cos = kwargs.get('cos', None)
-    tan = kwargs.get('tan', None)
-    opposite = kwargs.get('opposite', None)
-    hypotenuse = kwargs.get('hypotenuse', None)
-    adjacent = kwargs.get('adjacent', None)
-
-    if sin and hypotenuse:
-        opposite = sin * hypotenuse
-        return {'opposite': opposite}
-    elif sin and opposite:
-        hypotenuse = opposite / sin
-        return {'hypotenuse': hypotenuse}
-    elif cos and adjacent:
-        hypotenuse = adjacent / cos
-        return {'hypotenuse': hypotenuse}
-    elif cos and hypotenuse:
-        adjacent = cos * hypotenuse
-        return {'adjacent': adjacent}
-    elif tan and opposite:
-        adjacent = opposite / tan
-        return {'adjacent': adjacent}
-    elif tan and adjacent:
-        opposite = tan * adjacent
-        return {'opposite': opposite}
+def cos_from_edges(*, adjacent, hypotenuse):
+    return(adjacent / hypotenuse)
 
 
-def pythagorean(*args, **kwargs):
-    opposite = kwargs.get('opposite', None)
-    hypotenuse = kwargs.get('hypotenuse', None)
-    adjacent = kwargs.get('adjacent', None)
+def tan_from_degrees(degrees):
+    return math.tan(math.radians(degrees))
 
-    if hypotenuse and opposite:
+
+def tan_from_edges(*, opposite, adjacent):
+    return(opposite / adjacent)
+
+
+def opposite_from_sin(*, sin, hypotenuse):
+    return(sin * hypotenuse)
+
+
+def opposite_from_tan(*, tan, adjacent):
+    return(tan * adjacent)
+
+
+def adjacent_from_cos(*, cos, hypotenuse):
+    return(cos * hypotenuse)
+
+
+def adjacent_from_tan(*, tan, opposite):
+    return(tan * opposite)
+
+
+def hypotenuse_from_sin(*, sin, opposite):
+    return(sin * opposite)
+
+
+def hypotenuse_from_cos(*, cos, adjacent):
+    return(cos * adjacent)
+
+
+def pythagorean(opposite=None, hypotenuse=None, adjacent=None):
+    if hypotenuse is not None and opposite is not None:
         adjacent = math.sqrt(hypotenuse * hypotenuse - opposite * opposite)
-    elif adjacent and opposite:
+    elif adjacent is not None and opposite is not None:
         hypotenuse = math.sqrt(adjacent * adjacent + opposite * opposite)
-    elif hypotenuse and adjacent:
+    elif hypotenuse is not None and adjacent is not None:
         opposite = math.sqrt(hypotenuse * hypotenuse - adjacent * adjacent)
 
     return {'hypotenuse': hypotenuse, 'adjacent': adjacent,
@@ -82,20 +65,21 @@ def pythagorean(*args, **kwargs):
 
 if __name__ == "__main__":
     # Testing sin, cos, tan functions.
-    print(sin(degrees=35))  # Answer is .57
-    print(sin(opposite=2.8, hypotenuse=4.9))
+    print(sin_from_degrees(degrees=35))  # Answer is .57
+    print(sin_from_edges(opposite=2.8, hypotenuse=4.9))
 
-    print(cos(degrees=35))  # Answer is .82
-    print(cos(adjacent=4.0, hypotenuse=4.9))
+    print(cos_from_degrees(degrees=35))  # Answer is .82
+    print(cos_from_edges(adjacent=4.0, hypotenuse=4.9))
 
-    print(tan(degrees=35))  # Answer is .70
-    print(tan(opposite=2.8, adjacent=4.0))
+    print(tan_from_degrees(degrees=35))  # Answer is .70
+    print(tan_from_edges(opposite=2.8, adjacent=4.0))
 
     # Testing find_missing_side function.
-    print(find_missing_side(sin=sin(degrees=35), opposite=2.8))
-    print(find_missing_side(cos=cos(degrees=35), hypotenuse=4.9))
-    print(find_missing_side(tan=tan(degrees=35), adjacent=4.0))
+    print(hypotenuse_from_sin(sin=sin_from_degrees(degrees=35), opposite=2.8))
+    print(adjacent_from_cos(cos=cos_from_degrees(degrees=35), hypotenuse=4.9))
+    print(opposite_from_tan(tan=tan_from_degrees(degrees=35), adjacent=4.0))
 
     # Testing pythagorean function.
-    hypotenuse = find_missing_side(sin=sin(degrees=35), opposite=2.8)
-    print(pythagorean(opposite=2.8, hypotenuse=hypotenuse['hypotenuse']))
+    hypotenuse = hypotenuse_from_sin(sin=sin_from_degrees(degrees=35),
+                                     opposite=2.8)
+    print(pythagorean(opposite=2.8, hypotenuse=4.7))
