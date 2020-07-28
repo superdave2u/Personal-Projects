@@ -9,12 +9,12 @@ total = trig.pythagorean(opposite=2.8, hypotenuse=hypotenuse['hypotenuse'])
 print(total)
 board = turtle.Turtle()
 
-board.forward(total['hypotenuse'])  # draw base
+board.forward(total['adjacent'] * 50)  # draw base
 
 board.left(90)
-board.forward(total['opposite'])
+board.forward(total['opposite'] * 50)
 
-board.left(135)
-board.forward(total['adjacent'])
+board.left(125)
+board.forward(total['hypotenuse'] * 50)
 
 turtle.done()
