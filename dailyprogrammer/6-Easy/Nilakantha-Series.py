@@ -3,7 +3,7 @@
 def series(x):
     SumList = []
     for n in range(0, x):
-        SumList.append(((-1) ** n)/((2 * n + 3) ** 3 -(2 * n + 3)))
+        SumList.append(((-1) ** n)/((2 * n + 3) ** 3 - (2 * n + 3)))
     return((4 * ((3/4) + sum(SumList))))
 
 
