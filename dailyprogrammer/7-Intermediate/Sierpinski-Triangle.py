@@ -48,6 +48,7 @@ def LeftTriangle(Length):
 
 
 def Fractol(Depth, Length, StartingPoint):
+    # Recursive function
     if Depth == 0:
         return()
     else:
@@ -70,3 +71,4 @@ if __name__ == "__main__":
     turtle.speed(0)
 
     Fractol(5, Length, (0, 0))
+    turtle.end_fill()
