@@ -2,7 +2,7 @@
 
 import requests
 import json
-from math import radians, cos, sin, asin, sqrt
+import great_circle_calculator.great_circle_calculator as gcc
 
 
 class hapiConnect():
@@ -87,14 +87,13 @@ def haversine(lat1, lon1, lat2, lon2):
     Calculate the great circle distance between two points
     on the earth (specified in decimal degrees)
     """
-    # convert decimal degrees to radians
-    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+    return(gcc.distance_between_points((lon1, lat1), (lon2, lat2), unit='miles', haversine=True))
 
-    # haversine formula
-    dlon = lon2 - lon1
-    dlat = lat2 - lat1
-    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
-    c = 2 * asin(sqrt(a))
-    r = 3956  # Radius of earth in miles. Use 6371 for kilometers
-    return c * r
 
+def midpoint(lat1, lon1, lat2, lon2):
+    """
+    Calculate the great circle midpoint between two points
+    on the earth (specified in decimal degrees)
+    """
+    lon, lat = gcc.midpoint((lon1, lat1), (lon2, lat2))
+    return({'lat': lat, 'lon': lon})
