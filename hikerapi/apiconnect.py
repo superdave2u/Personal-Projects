@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
 import requests
+import json
+from math import radians, cos, sin, asin, sqrt
 
 
-class connect():
+class hapiConnect():
     def __init__(self, key):
         """[Constructor for the connection]
 
@@ -25,11 +27,11 @@ class connect():
             minLength (int, optional): [Min trail length, in miles]. Defaults to 0.
             minStars (int, optional): [Min star rating, 0-4]. Defaults to 0.
         """
-        r = requests.get(
-            '{}get-trails?lat={}?&lon={}&maxDistance={}&maxResults={}&sort={}&minLength={}&minStars={}&key={}'.format(
-                self.url, latitude, longitude, maxDistance, maxResults, sort, minLength, minStars, self.key)
-            ).raise_for_status()
-        return(r.json)
+        payload = {'lat': latitude, 'lon': longitude, 'maxDistance': maxDistance, 'maxResults': maxResults,
+                   'sort': sort, 'minLength': minLength, 'minStars': minStars, 'key': self.key}
+        r = requests.get('{}get-trails'.format(self.url), params=payload)
+
+        return(r.text)
 
     def getTrailsById(self, ids):
         """[Returns trails for given IDs.]
@@ -37,10 +39,10 @@ class connect():
         Args:
             ids ([str]): [one or more trail IDs, separated by commas]
         """
-        r = requests.get(
-            '{}get-trails-by-id?ids={}&key={}'.format(self.url, ids, self.key)
-        ).raise_for_status()
-        return(r.json)
+        payload = {'ids': ids, 'key': self.key}
+        r = requests.get('{}get-trails-by-id?'.format(self.url), params=payload)
+
+        return(r.text)
 
     def getConditions(self, ids):
         """[Returns conditions for a given trail.]
@@ -48,7 +50,51 @@ class connect():
         Args:
             ids ([str]): [one or more trail IDs, separated by commas]
         """
-        r = requests.get(
-            '{}get-trails-by-id?ids={}&key={}'.format(self.url, ids, self.key)
-        ).raise_for_status()
-        return(r.json)
+        payload = {'ids': ids, 'key': self.key}
+        r = requests.get('{}get-trails-by-id?'.format(self.url), params=payload).raise_for_status()
+
+        return(r.text)
+
+
+class gmapsConnect():
+    def __init__(self, key):
+        """[Google Maps API Connector]
+
+        Args:
+            key ([str]): [Google Maps API secret key]
+        """
+        self.url = 'https://maps.googleapis.com/maps/api/geocode/json?'
+        self.key = key
+
+    def getLatLong(self, address):
+        """[Returned in dict format, lat and long from a given address]
+
+        Args:
+            address ([str]): [The street address or plus code that you want to geocode.
+            Specify addresses in accordance with the format used by the national postal
+            service of the country concerned. Additional address elements such as business
+            names and unit, suite or floor numbers should be avoided. Street address elements 
+            should be delimited by spaces(shown here as url-escaped to %20): ]
+        """
+        payload = {'address': address, 'key': self.key}
+        r = requests.get(self.url, params=payload)
+        data = json.loads(r.text)
+        return(data['results'][0]['geometry']['location'])
+
+
+def haversine(lat1, lon1, lat2, lon2):
+    """
+    Calculate the great circle distance between two points
+    on the earth (specified in decimal degrees)
+    """
+    # convert decimal degrees to radians
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+
+    # haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a))
+    r = 3956  # Radius of earth in miles. Use 6371 for kilometers
+    return c * r
+
