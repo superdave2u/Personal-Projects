@@ -2,6 +2,7 @@
 
 import itertools
 import string
+import math
 
 def xor(str1, str2):
     if len(str1) != len(str2):
@@ -113,7 +114,7 @@ def is_english( input_text ):
 
 def divide_text_by_blocks(text, block_size):
     blocks = []
-    num_blocks = len(text)/block_size
+    num_blocks = math.ceil(len(text)/block_size)
     for i in range(num_blocks):
         blocks.append( text[i*block_size : (i+1)*block_size] )
     
