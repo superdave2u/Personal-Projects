@@ -196,19 +196,25 @@ def hamming_distance(str1, str2):
   
     return bin( int( result.encode('hex'), 16) ).count('1')
 
-def repeating_key_xor(plaintext, key):
+def repeating_key_xor(plaintext: str, key: str) -> str:
     if len(key) == 0 or len(key) > len(plaintext):
         raise "KEY LENGTH EXCEPTION!"
   
-    ciphertext_bytes = bytearray()
-    plaintext_bytes = bytearray(plaintext)
-    key_bytes = bytearray(key)
+    ciphertext_bytes = []
+    plaintext_bytes = []
+    plaintext_bytes.extend(map(ord, plaintext))
+    key_bytes = []
+    key_bytes.extend(map(ord, key))
   
     # XOR every byte of the plaintext with the corresponding byte from the key  
     for i in range( len(plaintext) ):
         k = key_bytes[i % len(key)]
         c = plaintext_bytes[i] ^ k
         ciphertext_bytes.append(c)
+
+    ciphertext_str=''
+    for ele in ciphertext_bytes:  
+        ciphertext_str += chr(ele)
       
     return str(ciphertext_bytes)
 
