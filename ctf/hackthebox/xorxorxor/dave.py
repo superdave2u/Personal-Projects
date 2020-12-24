@@ -16,7 +16,7 @@ print(transposed)
 all_keys = [] # list of lists. One list for every block. The list has all possible one-byte keys for the block.
 for block in transposed:  
     block_keys = []
-    for key in range(256): # brute force
+    for key in range(128): # brute force
         text = single_byte_xor( block , chr(key))
         if is_printable_text(text): # if the input char spits out printable text, save char
             block_keys.append(chr(key))
