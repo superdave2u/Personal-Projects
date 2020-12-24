@@ -16,7 +16,7 @@ print(transposed)
 all_keys = [] # list of lists. One list for every block. The list has all possible one-byte keys for the block.
 for block in transposed:  
     block_keys = []
-    for key in range(100): # brute force
+    for key in range(256): # brute force
         text = single_byte_xor( block , chr(key))
         if is_printable_text(text): # if the input char spits out printable text, save char
             block_keys.append(chr(key))
@@ -42,10 +42,10 @@ last_progress=0
 ts_print("{} of {} ({}%)".format(0,key_count_to_try,0))
 
 for i in range(key_count_to_try):
-    text = repeating_key_xor(ciphertext,key)
+    text = repeating_key_xor(ciphertext,real_keys[i])
     if is_english(text):
         print("Plaintext: {}".format(text))
-        print("Key: {}".format(key))
+        print("Key: {}".format(real_keys[i]))
         input()
         print("==================")
         
