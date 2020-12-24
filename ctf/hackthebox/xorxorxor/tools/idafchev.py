@@ -28,7 +28,6 @@ def single_byte_xor(plaintext, key):
       raise "KEY LENGTH EXCEPTION: In single_byte_xor key must be 1 byte long!"
     return xor(plaintext, key*len(plaintext))
 
-
 def has_nonprintable_characters( text ):
     for char in text:
         if char not in string.printable:
@@ -91,8 +90,7 @@ def has_english_words( text ):
         if word in text:
             return True
     return False
-  
-  
+
 def is_english( input_text ):    
     text = input_text.lower()
   
@@ -117,7 +115,6 @@ def is_english( input_text ):
         return False
  
     return True
-
 
 def divide_text_by_blocks(text, block_size):
     blocks = []
@@ -223,7 +220,6 @@ def repeating_key_xor(plaintext, key):
         ciphertext_bytes.append(c)
       
     return str(ciphertext_bytes)
-
 
 def break_repeat_key_xor( ciphertext ):
     # Tweaking this is useful. Lower value (0.03-0.05) helps find longer keys
