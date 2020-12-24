@@ -216,7 +216,7 @@ def repeating_key_xor(plaintext: str, key: str) -> str:
     for ele in ciphertext_bytes:  
         ciphertext_str += chr(ele)
       
-    return str(ciphertext_bytes)
+    return str(ciphertext_str)
 
 def break_repeat_key_xor( ciphertext ):
     # Tweaking this is useful. Lower value (0.03-0.05) helps find longer keys
