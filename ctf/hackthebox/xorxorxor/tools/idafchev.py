@@ -87,6 +87,13 @@ def has_english_words( text ):
     'more', 'use', 'man', 'find', 'here', 'thing', 'give', 'many']
   
     for word in most_frequent_words:
+        word = "{} ".format(word)
+        if word in text:
+            return True
+        word = " {} ".format(word)
+        if word in text:
+            return True
+        word = " {}".format(word)
         if word in text:
             return True
     return False
