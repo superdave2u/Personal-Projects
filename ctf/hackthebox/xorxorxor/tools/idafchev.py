@@ -4,17 +4,24 @@ import itertools
 import string
 import math
 
-def xor(str1, str2):
+def xor(str1: str, str2: str) -> str:
     if len(str1) != len(str2):
         raise "XOR EXCEPTION: Strings are not of equal length!"
-    s1 = bytearray(str1)
-    s2 = bytearray(str2)
-  
-    result = bytearray()
-    for i in range( len(s1) ):
-        result.append( s1[i] ^ s2[i] )
     
-    return str( result )
+    s1 = []
+    s1.extend(map(ord, str1))
+    s2 = []
+    s2.extend(map(ord, str2))
+    
+    result = []
+    for i in range( len(s1) ):
+        result.append(s1[i] ^ s2[i])
+    
+    final = ""  
+    for ele in result:  
+        final += chr(ele)
+
+    return str( final )
 
 def single_byte_xor(plaintext, key):
     if len(key) != 1:
