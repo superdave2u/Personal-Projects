@@ -112,14 +112,14 @@ def is_english( input_text ):
     if not has_vowels( text ):
         return False
  
-    # if has_forbidden_digraphs( text ):
-    #     return False
+    if has_forbidden_digraphs( text ):
+        return False
 
-    # if not has_necessary_percentage_frequent_characters( text ):
-    #     return False
+    if not has_necessary_percentage_frequent_characters( text ):
+        return False
 
-    # if not has_necessary_percentage_punctuation( text ):
-    #     return False
+    if not has_necessary_percentage_punctuation( text ):
+        return False
  
     return True
 
