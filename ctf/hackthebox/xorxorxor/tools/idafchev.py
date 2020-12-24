@@ -158,6 +158,9 @@ def is_printable_text( text ):
     text = text.lower()
     if has_nonprintable_characters(text):
         return False
+    return True
+
+def is_english( text ):
     if not has_necessary_percentage_punctuation( text ):
         return False
     if not has_necessary_percentage_letters( text ):
