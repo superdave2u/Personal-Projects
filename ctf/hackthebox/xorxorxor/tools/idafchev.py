@@ -157,15 +157,6 @@ def is_printable_text( text ):
         return False
     return True
 
-def is_english( text ):
-    if not has_necessary_percentage_punctuation( text ):
-        return False
-    if not has_necessary_percentage_letters( text ):
-        return False
-    if not has_vowels( text ):
-        return False
-    return True
-
 def find_xor_keysize( ciphertext, hamming_blocks, minsize=2, maxsize=10 ):
     hamming_dict = {} # <keysize> : <hamming distance>
   
