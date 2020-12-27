@@ -4,7 +4,7 @@ import itertools
 import string
 import math
 
-def xor(str1, str2):
+def xor(str1:bytes, str2:bytes) -> bytes:
     if len(str1) != len(str2):
         raise "XOR EXCEPTION: Strings are not of equal length!"
     s1 = bytearray(str1)
@@ -14,13 +14,12 @@ def xor(str1, str2):
     for i in range( len(s1) ):
         result.append( s1[i] ^ s2[i] )
     
-    return str( result )
+    return result
 
-def single_byte_xor(plaintext, key):
+def single_byte_xor(byte_text: bytes, key:bytes) -> bytes:
     if len(key) != 1:
       raise "KEY LENGTH EXCEPTION: In single_byte_xor key must be 1 byte long!"
-    return xor(plaintext, key*len(plaintext))
-
+    return xor(byte_text, key*len(byte_text))
 
 def has_nonprintable_characters( text ):
     for char in text:
@@ -84,7 +83,6 @@ def has_english_words( text ):
         if word in text:
             return True
     return False
-  
   
 def is_english( input_text ):    
     text = input_text.lower()
@@ -211,7 +209,6 @@ def repeating_key_xor(plaintext, key):
         ciphertext_bytes.append(c)
       
     return str(ciphertext_bytes)
-
 
 def break_repeat_key_xor( ciphertext ):
     # Tweaking this is useful. Lower value (0.03-0.05) helps find longer keys
