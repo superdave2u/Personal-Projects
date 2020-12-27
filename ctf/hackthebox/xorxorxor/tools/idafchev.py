@@ -246,3 +246,19 @@ def break_repeat_key_xor( ciphertext ):
                 print("Key: {}".format(key))
                 input()
                 print("==================")
+
+def break_single_byte_xor( ciphertext: bytes ):
+    keys = []
+    plaintext = []
+  
+    for key in range(256):
+        text = single_byte_xor( ciphertext , bytes([key]))
+        try:
+            decoded = text.decode('utf-8')
+            if not has_nonprintable_characters(decoded):
+                keys.append( bytes([key]) )
+                plaintext.append( decoded )
+        except:
+            continue 
+
+    return keys, plaintext
