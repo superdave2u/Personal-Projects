@@ -4,29 +4,23 @@ import itertools
 import string
 import math
 
-def xor(str1: str, str2: str) -> str:
+def xor(str1, str2):
     if len(str1) != len(str2):
         raise "XOR EXCEPTION: Strings are not of equal length!"
-    
-    s1 = []
-    s1.extend(map(ord, str1))
-    s2 = []
-    s2.extend(map(ord, str2))
-    
-    result = []
+    s1 = bytearray(str1)
+    s2 = bytearray(str2)
+  
+    result = bytearray()
     for i in range( len(s1) ):
-        result.append(s1[i] ^ s2[i])
+        result.append( s1[i] ^ s2[i] )
     
-    final = ""  
-    for ele in result:  
-        final += chr(ele)
-
-    return str( final )
+    return str( result )
 
 def single_byte_xor(plaintext, key):
     if len(key) != 1:
       raise "KEY LENGTH EXCEPTION: In single_byte_xor key must be 1 byte long!"
     return xor(plaintext, key*len(plaintext))
+
 
 def has_nonprintable_characters( text ):
     for char in text:
@@ -87,17 +81,11 @@ def has_english_words( text ):
     'more', 'use', 'man', 'find', 'here', 'thing', 'give', 'many']
   
     for word in most_frequent_words:
-        word = "{} ".format(word)
-        if word in text:
-            return True
-        word = " {} ".format(word)
-        if word in text:
-            return True
-        word = " {}".format(word)
         if word in text:
             return True
     return False
-
+  
+  
 def is_english( input_text ):    
     text = input_text.lower()
   
@@ -139,8 +127,7 @@ def transpose( blocks ):
         tmp = [] 
         for j in range(num_blocks):
             # tmp is composed of the i-th character of every block
-            if(i<len(blocks[j])):
-                tmp.append( blocks[j][i] )
+            tmp.append( blocks[j][i] )
         transposed.append( ''.join(tmp) )  
     return transposed
     
@@ -161,6 +148,12 @@ def has_necessary_percentage_letters(text, p=80):
 def is_printable_text( text ):
     text = text.lower()
     if has_nonprintable_characters(text):
+        return False
+    if not has_necessary_percentage_punctuation( text ):
+        return False
+    if not has_necessary_percentage_letters( text ):
+        return False
+    if not has_vowels( text ):
         return False
     return True
 
@@ -203,27 +196,22 @@ def hamming_distance(str1, str2):
   
     return bin( int( result.encode('hex'), 16) ).count('1')
 
-def repeating_key_xor(plaintext: str, key: str) -> str:
+def repeating_key_xor(plaintext, key):
     if len(key) == 0 or len(key) > len(plaintext):
         raise "KEY LENGTH EXCEPTION!"
   
-    ciphertext_bytes = []
-    plaintext_bytes = []
-    plaintext_bytes.extend(map(ord, plaintext))
-    key_bytes = []
-    key_bytes.extend(map(ord, key))
+    ciphertext_bytes = bytearray()
+    plaintext_bytes = bytearray(plaintext)
+    key_bytes = bytearray(key)
   
     # XOR every byte of the plaintext with the corresponding byte from the key  
     for i in range( len(plaintext) ):
         k = key_bytes[i % len(key)]
         c = plaintext_bytes[i] ^ k
         ciphertext_bytes.append(c)
-
-    ciphertext_str=''
-    for ele in ciphertext_bytes:  
-        ciphertext_str += chr(ele)
       
-    return str(ciphertext_str)
+    return str(ciphertext_bytes)
+
 
 def break_repeat_key_xor( ciphertext ):
     # Tweaking this is useful. Lower value (0.03-0.05) helps find longer keys
