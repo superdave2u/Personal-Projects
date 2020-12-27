@@ -6,9 +6,10 @@ from tools.idafchev import has_necessary_percentage_frequent_characters,has_nece
 
 import itertools
 import math
+import binascii
 from datetime import datetime
 
-cipher_bytes  = '134af6e1297bc4a96f6a87fe046684e8047084ee046d84c5282dd7ef292dc9'.encode()
+cipher_bytes  = binascii.unhexlify('134af6e1297bc4a96f6a87fe046684e8047084ee046d84c5282dd7ef292dc9')
 keysize   = 4
 blocks = divide_text_by_blocks(cipher_bytes, keysize)
 print('cipher_bytes',cipher_bytes)
