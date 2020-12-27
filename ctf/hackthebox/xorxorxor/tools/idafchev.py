@@ -124,9 +124,9 @@ def transpose( blocks ):
     for i in range(block_size):
         tmp = [] 
         for j in range(num_blocks):
-            # tmp is composed of the i-th character of every block
-            tmp.append( blocks[j][i] )
-        transposed.append( ''.join(tmp) )  
+            if(i<len(blocks[j])):
+                tmp.append( chr(blocks[j][i]) )
+        transposed.append( bytes(''.join(tmp),'utf-8') )
     return transposed
     
 def has_necessary_percentage_letters(text, p=80):
@@ -147,10 +147,10 @@ def is_printable_text( text ):
     text = text.lower()
     if has_nonprintable_characters(text):
         return False
-    if not has_necessary_percentage_punctuation( text ):
-        return False
-    if not has_necessary_percentage_letters( text ):
-        return False
+    # if not has_necessary_percentage_punctuation( text ):
+    #     return False
+    # if not has_necessary_percentage_letters( text ):
+    #     return False
     if not has_vowels( text ):
         return False
     return True
@@ -207,8 +207,8 @@ def repeating_key_xor(plaintext, key):
         k = key_bytes[i % len(key)]
         c = plaintext_bytes[i] ^ k
         ciphertext_bytes.append(c)
-      
-    return str(ciphertext_bytes)
+    
+    return ciphertext_bytes
 
 def break_repeat_key_xor( ciphertext ):
     # Tweaking this is useful. Lower value (0.03-0.05) helps find longer keys

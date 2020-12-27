@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import os
-flag = open('flag.txt', 'r').read().strip().encode()
+flag = open('flag.txt', 'r').read().strip().encode() # bytes
 
 class XOR:
     def __init__(self):
